@@ -1,7 +1,11 @@
-from collections import OrderedDict
-import keyword
+from __future__ import unicode_literals
 
-#TODO: can we just sub-class tuple and be a tuple of tuples with attributes?
+import keyword
+from builtins import object, str
+from collections import OrderedDict
+
+
+# TODO: can we just sub-class tuple and be a tuple of tuples with attributes?
 class Choices(object):
     """ An enum-type class for creating immutable choices for django CharFields.
         Usage:
@@ -50,7 +54,7 @@ class Choices(object):
                     if k.replace("-", "_").replace(" ", "_") == name:
                         return k
 
-            self._choices[name] #check it exists
+            self._choices[name]  # check it exists
             return name
         except KeyError:
             raise AttributeError("Choices object has no such attribute {}".format(name))
@@ -63,12 +67,14 @@ class Choices(object):
         return iter(self.constants)
 
     def __repr__(self):
-        return unicode(self.choices)
+        return str(self.choices)
 
     @property
     def constants(self):
-        return self._choices.keys() #TODO: can we make this faster by storing a constant reference?
+        # TODO: can we make this faster by storing a constant reference?
+        return list(self._choices.keys())
 
     @property
     def choices(self):
-        return self._choices.items() #TODO: can we make this faster by storing a constant reference?
+        # TODO: can we make this faster by storing a constant reference?
+        return list(self._choices.items())

@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import unittest
 
 from choices import Choices
@@ -11,6 +13,7 @@ colours = Choices([
 
 
 class ChoicesTestCase(unittest.TestCase):
+
     def test_create_choices(self):
         self.assertEqual(colours.red, 'red')
         self.assertEqual(colours.white, 'white')
